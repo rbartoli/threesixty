@@ -1,0 +1,13 @@
+.DS_Store
+*.log
+coverage
+example
+src
+test
+.babelrc
+.editorconfig
+.eslintignore
+.eslintrc
+.gitattributes
+.travis.yml
+webpack.config.babel.js
