@@ -8,7 +8,7 @@
 A minimal, dependency-free vanilla 360° slider.
 
 ## Demo
-[screenshot here]
+<a href="http://jsfiddle.net/gh/get/library/pure/rbartoli/threesixty/tree/master/example"><img src="https://github.com/rbartoli/threesixty/raw/master/example/screenshot.png" width="574"></a>
 
 [Demo](http://jsfiddle.net/gh/get/library/pure/rbartoli/threesixty/tree/master/example)
 

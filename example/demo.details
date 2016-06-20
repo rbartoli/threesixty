@@ -1,0 +1,10 @@
+ /*
+ ---
+ name: threesixty example
+ description: Shows how to get started with threesixty
+ authors:
+   - Riccardo Bartoli
+ normalize_css: no
+ js_wrap: b
+ ...
+ */

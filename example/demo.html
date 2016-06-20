@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <style>
+          html {
+            box-sizing: border-box;
+          }
+          *, *:before, *:after {
+            box-sizing: inherit;
+          }
+
+          img {
+            max-width: 100%;
+            height: auto;
+            pointer-events: none;
+          }
+
+          .threesixty {
+            cursor: grab;
+            cursor: -webkit-grab;
+            width: 572px;
+            height: 342px;
+            border: 1px dashed #DDD;
+          }
+
+          .threesixty--grabbing {
+            cursor: grabbing;
+            cursor: -webkit-grabbing;
+          }
+        </style>
+    </head>
+
+    <body>
+        <h1>threesixty demo</h1>
+        <div id="one" class="threesixty"></div>
+
+        <script src="https://rawgit.com/rbartoli/threesixty/master/dist/threesixty.min.js"></script>
+        <script src="https://rawgit.com/rbartoli/threesixty/master/example/demo.js"></script>
+    </body>
+</html>
