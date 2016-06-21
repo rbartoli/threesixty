@@ -2,6 +2,7 @@
 
 [![Npm package version](https://img.shields.io/npm/v/threesixty.svg?style=flat-square)](https://www.npmjs.com/package/threesixty)
 [![Travis](https://img.shields.io/travis/rbartoli/threesixty.svg?style=flat-square)](https://travis-ci.org/rbartoli/threesixty)
+[![Npm dependencies](https://david-dm.org/rbartoli/threesixty.svg)](https://www.npmjs.com/package/threesixty)
 [![Npm total dowloads](https://img.shields.io/npm/dt/threesixty.svg?style=flat-square)](https://www.npmjs.com/package/threesixty)
 [![License](https://img.shields.io/github/license/rbartoli/threesixty.svg?style=flat-square)](/LICENSE)
 
