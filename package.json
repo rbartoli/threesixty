@@ -11,7 +11,7 @@
     "lint": "eslint src test example",
     "prepublish": "npm run lint && npm run test && npm run clean && npm run build && npm run build:umd && npm run build:umd:min",
     "test": "cross-env NODE_ENV=test mocha --compilers js:babel-register --recursive  --require ./test/setup.js",
-    "test:cov": "babel-node node_modules/.bin/isparta cover node_modules/.bin/_mocha --root src/ --report text",
+    "test:coverage": "babel-node node_modules/.bin/isparta cover node_modules/.bin/_mocha --root src/ --report text",
     "test:watch": "npm test -- --watch"
   },
   "repository": {
