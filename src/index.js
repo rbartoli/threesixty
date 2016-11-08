@@ -13,12 +13,6 @@ const threesixty = (container, images, options) => {
   }
 
   const o = Object.assign({}, defaults, options)
-
-  const isTouchSupported = 'ontouchstart' in window
-  const startEvent = isTouchSupported ? 'touchstart' : 'mousedown'
-  const stopEvent = isTouchSupported ? 'touchend' : 'mouseup'
-  const moveEvent = isTouchSupported ? 'touchmove' : 'mousemove'
-
   const totalFrames = images.length
 
   let mouseX = 0
@@ -71,7 +65,8 @@ const threesixty = (container, images, options) => {
   //------------------------------------------------------------------------------
 
   const initListeners = () => {
-    container.addEventListener(startEvent, startDrag)
+    container.addEventListener('touchstart', startDrag)
+    container.addEventListener('mousedown', startDrag)
   }
 
   const drag = (e) => {
@@ -90,14 +85,18 @@ const threesixty = (container, images, options) => {
 
   const startDrag = (e) => {
     e.preventDefault()
-    document.addEventListener(moveEvent, drag)
-    document.addEventListener(stopEvent, stopDrag)
+    document.addEventListener('touchmove', drag)
+    document.addEventListener('mousemove', drag)
+    document.addEventListener('touchend', stopDrag)
+    document.addEventListener('mouseup', stopDrag)
   }
 
   const stopDrag = (e) => {
     e.preventDefault()
-    document.removeEventListener(moveEvent, drag)
-    document.removeEventListener(stopEvent, stopDrag)
+    document.removeEventListener('touchmove', drag)
+    document.removeEventListener('mousemove', drag)
+    document.addEventListener('touchend', stopDrag)
+    document.addEventListener('mouseup', stopDrag)
   }
 
   //------------------------------------------------------------------------------
