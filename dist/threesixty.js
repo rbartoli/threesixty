@@ -82,12 +82,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  var o = Object.assign({}, defaults, options);
-
-	  var isTouchSupported = 'ontouchstart' in window;
-	  var startEvent = isTouchSupported ? 'touchstart' : 'mousedown';
-	  var stopEvent = isTouchSupported ? 'touchend' : 'mouseup';
-	  var moveEvent = isTouchSupported ? 'touchmove' : 'mousemove';
-
 	  var totalFrames = images.length;
 
 	  var mouseX = 0;
@@ -140,7 +134,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  //------------------------------------------------------------------------------
 
 	  var initListeners = function initListeners() {
-	    container.addEventListener(startEvent, startDrag);
+	    container.addEventListener('touchstart', startDrag);
+	    container.addEventListener('mousedown', startDrag);
 	  };
 
 	  var drag = function drag(e) {
@@ -159,14 +154,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  var startDrag = function startDrag(e) {
 	    e.preventDefault();
-	    document.addEventListener(moveEvent, drag);
-	    document.addEventListener(stopEvent, stopDrag);
+	    document.addEventListener('touchmove', drag);
+	    document.addEventListener('mousemove', drag);
+	    document.addEventListener('touchend', stopDrag);
+	    document.addEventListener('mouseup', stopDrag);
 	  };
 
 	  var stopDrag = function stopDrag(e) {
 	    e.preventDefault();
-	    document.removeEventListener(moveEvent, drag);
-	    document.removeEventListener(stopEvent, stopDrag);
+	    document.removeEventListener('touchmove', drag);
+	    document.removeEventListener('mousemove', drag);
+	    document.addEventListener('touchend', stopDrag);
+	    document.addEventListener('mouseup', stopDrag);
 	  };
 
 	  //------------------------------------------------------------------------------
