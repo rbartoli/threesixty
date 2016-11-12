@@ -5,7 +5,6 @@ const document = jsdom('<!doctype html><html><body></body></html>', {
     FetchExternalResources : ['img']
   }
 })
-const window = document.defaultView
 
 global.document = document
 global.window = document.defaultView
@@ -15,7 +14,7 @@ global.MouseEvent = global.window.MouseEvent
 
 Object.keys(document.defaultView).forEach((property) => {
   if (typeof global[property] === 'undefined') {
-    global[property] = document.defaultView[property];
+    global[property] = document.defaultView[property]
   }
-});
+})
 
