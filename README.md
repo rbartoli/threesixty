@@ -17,6 +17,7 @@ A minimal, dependency-free vanilla 360° slider.
 - Super easy to set up
 - No dependencies
 - Touch events
+- Touch-enabled laptops support (touch + mouse)
 
 ##  Installation
 ```bash
@@ -71,6 +72,8 @@ Method | Arguments               | Method Description
 `getCurrentFrame`  |                             | Returns `options.currentFrame` value
 
 ## Tests
+__IMPORTANT:__ To be able run the tests, [node-canvas](https://github.com/Automattic/node-canvas/tree/v1.x) package is required to provide a Node.js canvas implementation for [jsdom](https://github.com/tmpvar/jsdom). Please have a look at [their project page](https://github.com/Automattic/node-canvas/tree/v1.x) so you can see the requirements needed to install it.
+
 ```bash
 npm test
 ```
