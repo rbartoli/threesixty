@@ -6,12 +6,7 @@ email, or any other method with the owners of this repository before making a ch
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
 ## Dependencies
-
-Because `node-canvas` needs a lot of depencies that are hard to install on Windows, this process only works on OSX:
-
-```bash
-brew install pkg-config cairo libpng jpeg giflib
-```
+__IMPORTANT:__ To be able run the tests, [node-canvas](https://github.com/Automattic/node-canvas/tree/v1.x) package is required to provide a Node.js canvas implementation for [jsdom](https://github.com/tmpvar/jsdom). Please have a look at [their project page](https://github.com/Automattic/node-canvas/tree/v1.x) so you can see the requirements needed to install it.
 
 ## Setup 
 ```js
