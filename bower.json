@@ -1,0 +1,32 @@
+{
+  "name": "threesixty",
+  "version": "0.2.0",
+  "description": "A minimal, dependency-free vanilla 360 slider",
+  "main": [
+    "dist/threesixty.js",
+    "dist/threesixty.min.js"
+  ],
+  "authors": [
+    "Riccardo Bartoli <info@rblab.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "threesixty",
+    "360",
+    "slider",
+    "slider",
+    "image",
+    "sequence"
+  ],
+  "homepage": "https://github.com/rbartoli/threesixty",
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "coverage",
+    "example",
+    "node_modules",
+    "src",
+    "test",
+    "webpack.config.babel.js"
+  ]
+}
