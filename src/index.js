@@ -65,12 +65,14 @@ const threesixty = (container, images, options) => {
   //------------------------------------------------------------------------------
 
   const initListeners = () => {
-    container.addEventListener('touchstart', startDrag)
+    container.addEventListener('touchstart', startDrag, {passive: true})
     container.addEventListener('mousedown', startDrag)
   }
 
   const drag = (e) => {
-    e.preventDefault()
+    if (!isTouchEvent(e)) {
+      e.preventDefault()
+    }
 
     mouseX = (e.pageX !== undefined) ? e.pageX : e.changedTouches[0].pageX
 
@@ -84,18 +86,24 @@ const threesixty = (container, images, options) => {
   }
 
   const startDrag = (e) => {
-    e.preventDefault()
-    document.addEventListener('touchmove', drag)
+    if (!isTouchEvent(e)) {
+      e.preventDefault()
+    }
+
+    document.addEventListener('touchmove', drag, {passive: true})
     document.addEventListener('mousemove', drag)
     document.addEventListener('touchend', stopDrag)
     document.addEventListener('mouseup', stopDrag)
   }
 
   const stopDrag = (e) => {
-    e.preventDefault()
+    if (!isTouchEvent(e)) {
+      e.preventDefault()
+    }
+
     document.removeEventListener('touchmove', drag)
     document.removeEventListener('mousemove', drag)
-    document.addEventListener('touchend', stopDrag)
+    document.addEventListener('touchend', stopDrag, {passive: true})
     document.addEventListener('mouseup', stopDrag)
   }
 
@@ -151,6 +159,10 @@ const emptyDomNode = (element) => {
       element.removeChild(element.firstChild)
     }
   }
+}
+
+const isTouchEvent = (e) => {
+  return e.touches
 }
 
 export default threesixty

@@ -134,12 +134,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  //------------------------------------------------------------------------------
 
 	  var initListeners = function initListeners() {
-	    container.addEventListener('touchstart', startDrag);
+	    container.addEventListener('touchstart', startDrag, { passive: true });
 	    container.addEventListener('mousedown', startDrag);
 	  };
 
 	  var drag = function drag(e) {
-	    e.preventDefault();
+	    if (!isTouchEvent(e)) {
+	      e.preventDefault();
+	    }
 
 	    mouseX = e.pageX !== undefined ? e.pageX : e.changedTouches[0].pageX;
 
@@ -153,18 +155,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  var startDrag = function startDrag(e) {
-	    e.preventDefault();
-	    document.addEventListener('touchmove', drag);
+	    if (!isTouchEvent(e)) {
+	      e.preventDefault();
+	    }
+
+	    document.addEventListener('touchmove', drag, { passive: true });
 	    document.addEventListener('mousemove', drag);
 	    document.addEventListener('touchend', stopDrag);
 	    document.addEventListener('mouseup', stopDrag);
 	  };
 
 	  var stopDrag = function stopDrag(e) {
-	    e.preventDefault();
+	    if (!isTouchEvent(e)) {
+	      e.preventDefault();
+	    }
+
 	    document.removeEventListener('touchmove', drag);
 	    document.removeEventListener('mousemove', drag);
-	    document.addEventListener('touchend', stopDrag);
+	    document.addEventListener('touchend', stopDrag, { passive: true });
 	    document.addEventListener('mouseup', stopDrag);
 	  };
 
@@ -224,6 +232,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      element.removeChild(element.firstChild);
 	    }
 	  }
+	};
+
+	var isTouchEvent = function isTouchEvent(e) {
+	  return e.touches;
 	};
 
 	exports.default = threesixty;
