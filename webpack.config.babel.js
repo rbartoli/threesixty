@@ -1,22 +1,28 @@
 import path from 'path'
 import webpack from 'webpack'
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
 
 const config = {
-  context: path.join(__dirname, 'src'),
+  mode: process.env.NODE_ENV,
   entry: [
-    './index.js'
+    './src/index.js'
   ],
   output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: process.env.NODE_ENV === 'production' ? 'threesixty.min.js' : 'threesixty.js',
     library: 'threesixty',
     libraryTarget: 'umd',
-    umdNamedDefine: true
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel'
+        use: [
+          {
+            loader: 'babel-loader'
+          }
+        ]
       }
     ]
   },
@@ -25,19 +31,18 @@ const config = {
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
-    })
-  ]
-}
-
-if (process.env.NODE_ENV === 'production') {
-  config.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        screw_ie8: true,
-        warnings: false
-      }
-    })
-  )
+    }),
+  ],
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          ie8: false,
+          warnings: false,
+        },
+      })
+    ]
+  },
 }
 
 export default config

@@ -1,4 +1,4 @@
-import { jsdom } from 'jsdom'
+import { jsdom } from 'jsdom/lib/old-api'
 
 const document = jsdom('<!doctype html><html><body></body></html>', {
   features: {
