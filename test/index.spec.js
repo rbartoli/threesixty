@@ -160,11 +160,19 @@ describe('dom manipulation', () => {
     instance.init()
   })
 
-  it('should add the first image to the container', () => {
+  it('should add the first image to the container', (done) => {
     const expected = `<div><img src="${DUMMY_IMAGE}"></div>`
-    const actual = container.outerHTML
+    setTimeout(() => {
+      try {
+        instance.next()
+        const actual = container.outerHTML
 
-    expect(actual).to.equal(expected)
+        expect(actual).to.equal(expected)
+        done()
+      } catch(e) {
+        done(e)
+      }
+    }, TIMEOUT)
   })
 })
 
