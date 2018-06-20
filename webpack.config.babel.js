@@ -12,6 +12,7 @@ const config = {
     filename: process.env.NODE_ENV === 'production' ? 'threesixty.min.js' : 'threesixty.js',
     library: 'threesixty',
     libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   module: {
     rules: [
