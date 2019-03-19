@@ -161,7 +161,7 @@ describe('dom manipulation', () => {
   })
 
   it('should add the first image to the container', (done) => {
-    const expected = `<div><img src="${DUMMY_IMAGE}"></div>`
+    const expected = `<div><img src="${DUMMY_IMAGE}" draggable="false"></div>`
     setTimeout(() => {
       try {
         instance.next()

@@ -1,20 +1,30 @@
-import { jsdom } from 'jsdom/lib/old-api'
+const jsdom = require('jsdom')
 
-const document = jsdom('<!doctype html><html><body></body></html>', {
-  features: {
-    FetchExternalResources : ['img']
+class CustomResourceLoader extends jsdom.ResourceLoader {
+  constructor () {
+    super({ strictSSL: false })
   }
+
+  fetch (url, options) {
+    // Override the contents of this script to do something unusual.
+    if (url === 'transparent.png') {
+      const fs = require('fs')
+      const path = require('path')
+      const transparentImage = path.join(__dirname, 'transparent.png');
+      return Promise.resolve(fs.readFileSync(transparentImage))
+    }
+
+    return super.fetch(url, options)
+  }
+}
+
+const resourceLoader = new CustomResourceLoader()
+
+const dom = new jsdom.JSDOM('<!doctype html><body></body></html>', {
+  resources: resourceLoader
 })
 
-global.document = document
-global.window = document.defaultView
-global.navigator = global.window.navigator
-global.Image = global.window.Image
-global.MouseEvent = global.window.MouseEvent
-
-Object.keys(document.defaultView).forEach((property) => {
-  if (typeof global[property] === 'undefined') {
-    global[property] = document.defaultView[property]
-  }
-})
+global.document = dom.window.document
+global.Image = dom.window.Image
+global.MouseEvent = dom.window.MouseEvent
 
