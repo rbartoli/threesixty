@@ -10,7 +10,7 @@ class CustomResourceLoader extends jsdom.ResourceLoader {
     if (url === 'transparent.png') {
       const fs = require('fs')
       const path = require('path')
-      const transparentImage = path.join(__dirname, 'transparent.png');
+      const transparentImage = path.join(__dirname, 'transparent.png')
       return Promise.resolve(fs.readFileSync(transparentImage))
     }
 
