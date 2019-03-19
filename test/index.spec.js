@@ -103,7 +103,8 @@ describe('arguments', () => {
 describe('options', () => {
   const options = {
     interactive: false,
-    currentFrame: 2
+    currentFrame: 2,
+    reverse: true
   }
 
   before(() => {
@@ -144,6 +145,22 @@ describe('options', () => {
     const instance = threesixty(container, IMAGES, options)
     const actual = instance.getCurrentFrame()
     const expected = 2
+
+    expect(actual).to.equal(expected)
+  })
+
+  it('should use defaults if no option is provided', () => {
+    const instance = threesixty(container, IMAGES)
+    const actual = instance.isReverse()
+    const expected = false
+
+    expect(actual).to.equal(expected)
+  })
+
+  it('should use provided reverse option instead of default', () => {
+    const instance = threesixty(container, IMAGES, options)
+    const actual = instance.isReverse()
+    const expected = true
 
     expect(actual).to.equal(expected)
   })
@@ -255,59 +272,119 @@ describe('previous/next image', () => {
 describe('mouse interaction', () => {
   let instance
 
-  beforeEach(() => {
-    container = document.createElement('div')
-    instance = threesixty(container, IMAGES)
-    instance.init()
+  describe('non-reverse', () => {
+    beforeEach(() => {
+      container = document.createElement('div')
+      instance = threesixty(container, IMAGES)
+      instance.init()
+    })
+
+    it('should advance to the next image if dragging towards right', (done) => {
+      const expected = 1
+      setTimeout(() => {
+        try {
+          clickAndDrag()
+
+          const actual = instance.getCurrentFrame()
+
+          expect(actual).to.equal(expected)
+          done()
+        } catch(e) {
+          done(e)
+        }
+      }, TIMEOUT)
+    })
+
+    it('should go back to the previous image if dragging towards left', (done) => {
+      const expected = LAST_IMAGE_INDEX
+      setTimeout(() => {
+        try {
+          clickAndDrag(-1)
+
+          const actual = instance.getCurrentFrame()
+
+          expect(actual).to.equal(expected)
+          done()
+        } catch(e) {
+          done(e)
+        }
+      }, TIMEOUT)
+    })
+
+    it('should go back to the first image if dragging times is equal to total number of slides', (done) => {
+      const expected = 0
+      setTimeout(() => {
+        try {
+          IMAGES.forEach((item, i) => {
+            clickAndDrag(i + 1)
+          })
+
+          const actual = instance.getCurrentFrame()
+
+          expect(actual).to.equal(expected)
+          done()
+        } catch(e) {
+          done(e)
+        }
+      }, TIMEOUT)
+    })
   })
 
-  it('should advance to the next image if dragging towards right', (done) => {
-    const expected = 1
-    setTimeout(() => {
-      try {
-        clickAndDrag()
+  describe('reverse', () => {
+    beforeEach(() => {
+      container = document.createElement('div')
+      instance = threesixty(container, IMAGES, { reverse: true })
+      instance.init()
+    })
 
-        const actual = instance.getCurrentFrame()
+    it('should advance to the next image if dragging towards right', (done) => {
+      const expected = 3
+      setTimeout(() => {
+        try {
+          clickAndDrag()
 
-        expect(actual).to.equal(expected)
-        done()
-      } catch(e) {
-        done(e)
-      }
-    }, TIMEOUT)
-  })
+          const actual = instance.getCurrentFrame()
 
-  it('should go back to the previous image if dragging towards left', (done) => {
-    const expected = LAST_IMAGE_INDEX
-    setTimeout(() => {
-      try {
-        clickAndDrag(-1)
+          expect(actual).to.equal(expected)
+          done()
+        } catch(e) {
+          done(e)
+        }
+      }, TIMEOUT)
+    })
 
-        const actual = instance.getCurrentFrame()
+    it('should go back to the previous image if dragging towards left', (done) => {
+      const expected = 1
+      setTimeout(() => {
+        try {
+          clickAndDrag(-1)
 
-        expect(actual).to.equal(expected)
-        done()
-      } catch(e) {
-        done(e)
-      }
-    }, TIMEOUT)
-  })
+          const actual = instance.getCurrentFrame()
 
-  it('should go back to the first image if dragging times is equal to total number of slides', (done) => {
-    const expected = 0
-    setTimeout(() => {
-      try {
-        IMAGES.forEach((item, i) => {
-          clickAndDrag(i + 1)
-        })
+          expect(actual).to.equal(expected)
+          done()
+        } catch(e) {
+          done(e)
+        }
+      }, TIMEOUT)
+    })
 
-        const actual = instance.getCurrentFrame()
+    it('should go back to the first image if dragging times is equal to total number of slides', (done) => {
+      const expected = 0
+      setTimeout(() => {
+        try {
+          IMAGES.forEach((item, i) => {
+            clickAndDrag(i + 1)
+          })
 
-        expect(actual).to.equal(expected)
-        done()
-      } catch(e) {
-        done(e)
-      }
-    }, TIMEOUT)
+          const actual = instance.getCurrentFrame()
+
+          expect(actual).to.equal(expected)
+          done()
+        } catch(e) {
+          done(e)
+        }
+      }, TIMEOUT)
+    })
   })
 })
