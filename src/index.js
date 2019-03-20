@@ -9,6 +9,7 @@ const threesixty = (container, images, options) => {
 
   const defaults = {
     interactive: true,
+    reverse: false,
     currentFrame: 0
   }
 
@@ -76,10 +77,18 @@ const threesixty = (container, images, options) => {
 
     mouseX = (e.pageX !== undefined) ? e.pageX : e.changedTouches[0].pageX
 
-    if (mouseX < oldMouseX) {
-      previous()
-    } else if (mouseX > oldMouseX) {
-      next()
+    if (o.reverse) {
+      if (mouseX > oldMouseX) {
+        previous()
+      } else if (mouseX < oldMouseX) {
+        next()
+      }
+    } else {
+      if (mouseX < oldMouseX) {
+        previous()
+      } else if (mouseX > oldMouseX) {
+        next()
+      }
     }
 
     oldMouseX = mouseX
@@ -130,6 +139,7 @@ const threesixty = (container, images, options) => {
   }
 
   const isInteractive = () => o.interactive
+  const isReverse = () => o.reverse
   const getCurrentFrame = () => o.currentFrame
 
   //------------------------------------------------------------------------------
@@ -143,6 +153,7 @@ const threesixty = (container, images, options) => {
     previous,
     next,
     isInteractive,
+    isReverse,
     getCurrentFrame
   }
 }

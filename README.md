@@ -52,7 +52,8 @@ You can also provide an `options` object. Here's an **overview of the default va
 ```js
 threesixty(container, images, {
   interactive: true,
-  currentImage: 0
+  currentImage: 0,
+  reverse: false
 });
 ```
 
@@ -62,6 +63,9 @@ Enable or disable mouse interactivity.
 #### `options.currentImage`
 Set the current image index.
 
+#### `options.reverse`
+Reverses the direction the image rotates when dragging.
+
 ## API
 Method | Arguments               | Method Description
 -----------|----------------------------------|-------------------------------------------------------------------------------------
@@ -69,6 +73,7 @@ Method | Arguments               | Method Description
 `previous`  |                             | Go back to the previous frame
 `next`  |                             | Advance to the next frame
 `isInteractive`  |                             | Returns `options.interactive` value
+`isReverse`  |                             | Returns `options.reverse` value
 `getCurrentFrame`  |                             | Returns `options.currentFrame` value
 
 ## Tests
